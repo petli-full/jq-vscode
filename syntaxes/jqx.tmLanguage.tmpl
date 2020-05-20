@@ -1,0 +1,34 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "JQX",
+    "patterns": [
+        {
+            "include": "#keywords"
+        },
+        {
+            "include": "#strings"
+        }
+    ],
+    "repository": {
+        "keywords": {
+            "patterns": [
+                {
+                    "name": "support.function.jqx",
+                    "match": "\\b({{functions}})\\b"
+                }
+            ]
+        },
+        "strings": {
+            "name": "string.quoted.double.jqx",
+            "begin": "\"",
+            "end": "\"",
+            "patterns": [
+                {
+                    "name": "constant.character.escape.jqx",
+                    "match": "\\\\."
+                }
+            ]
+        }
+    },
+    "scopeName": "source.jqx"
+}
