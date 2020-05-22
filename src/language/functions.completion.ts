@@ -1,7 +1,9 @@
 import * as vscode from 'vscode';
-import { jq } from 'jqdash';
+import jqdash from 'jqdash';
 
-export const functionsCompletion = jq('null', 'builtins | sort | map(split("/") | [.[0], (.[1] | tonumber)])', ['-M']).then((result) => {
+export const functionsCompletion = jqdash().then((jqmodule: any) => {
+    const { jq } = jqmodule;
+    const result = jq('null', 'builtins | sort | map(split("/") | [.[0], (.[1] | tonumber)])', ['-M']).stdout;
     const funcs: any[][] = JSON.parse(result);
     const functionsCompletion = {
 

@@ -1,13 +1,12 @@
-const jq = require('jqdash');
+const jqdash = require('jqdash');
 const fs = require('fs');
 
 const templateFile = './syntaxes/jqx.tmLanguage.tmpl';
 const jsonFile = './syntaxes/jqx.tmLanguage.json';
-jq.jq('', '').then(result => {
-    console.log(result);
-});
-jq.jq('null', 'builtins | map(split("/")[0]) | unique', ['-M']).then(result => {
-    const funcs = JSON.parse(result);
+jqdash.default().then((result) => {
+    const jq = result.jq;
+    const jqresult = jq('null', 'builtins | map(split("/")[0]) | unique', ['-M']).stdout;
+    const funcs = JSON.parse(jqresult);
     fs.readFile(templateFile, (err, data) => {
         if (err) {
             console.error(err);

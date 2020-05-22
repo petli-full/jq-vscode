@@ -3,7 +3,7 @@
 	"name": "jq-vscode",
 	"displayName": "jq-vscode",
 	"description": "an inline jq processer for vscode",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"engines": {
 		"vscode": "^1.45.0"
 	},
@@ -23,7 +23,7 @@
 		"onLanguage:json",
 		"onLanguage:jqx"
 	],
-	"main": "./out/extension.js",
+	"main": "./dist/extension.js",
 	"contributes": {
 		"commands": [
 			{
@@ -92,7 +92,7 @@
 		"webpack-cli": "^3.3.11"
 	},
 	"dependencies": {
-		"jqdash": "^1.0.0",
+		"jqdash": "^1.0.1",
 		"rxjs": "^6.5.5"
 	}
 }

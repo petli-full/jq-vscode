@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { jq } from 'jqdash';
+import jqdash from 'jqdash';
 import { newOutput } from './output';
 
 const jq$ = new Subject<string>();
@@ -76,6 +76,8 @@ export function initJq(): vscode.Disposable {
     };
 }
 
+const _jqdash = jqdash();
+
 function execjq() {
     if (!_hasJq) {
         return;
@@ -85,9 +87,10 @@ function execjq() {
     if (!_json) {
         opts.push('-n');
     }
-    jq(_json, _jq, opts).then((result) => {
-        newOutput(result);
-    }, (err) => {
-        newOutput("no result");
+    _jqdash.then((jqmodule: any) => {
+        const { jq } = jqmodule;
+        const result = jq(_json, _jq, opts);
+
+        newOutput(result.stdout || result.stderr);
     });
 }
