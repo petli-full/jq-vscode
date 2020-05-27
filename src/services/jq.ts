@@ -76,7 +76,7 @@ export function initJq(): vscode.Disposable {
     };
 }
 
-const _jqdash = jqdash();
+let _jqdash = jqdash();
 
 function execjq() {
     if (!_hasJq) {
@@ -89,8 +89,12 @@ function execjq() {
     }
     _jqdash.then((jqmodule: any) => {
         const { jq } = jqmodule;
-        const result = jq(_json, _jq, opts);
-
-        newOutput(result.stdout || result.stderr);
+        try {
+            const result = jq(_json, _jq, opts);
+            newOutput(result.stdout || result.stderr);
+        } catch (err) {
+            _jqdash = jqdash();
+            newOutput('runtime error');
+        }
     });
 }

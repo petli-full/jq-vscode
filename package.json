@@ -3,7 +3,7 @@
 	"name": "jq-vscode",
 	"displayName": "jq-vscode",
 	"description": "an inline jq processer for vscode",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"engines": {
 		"vscode": "^1.45.0"
 	},
