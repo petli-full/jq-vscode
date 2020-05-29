@@ -67,11 +67,25 @@ export function initJq(): vscode.Disposable {
         }
     });
 
+    const selectionEvt = vscode.window.onDidChangeTextEditorSelection((selectChangeEvt) => {
+        const doc = vscode.window.activeTextEditor?.document;
+        if (doc && doc.languageId !== 'jqx') {
+            const sel = vscode.window.activeTextEditor?.selection;
+            const docPath = doc.uri.toString();
+            if (!sel || sel.isEmpty) {
+                jqService.pushjson(docPath, doc.getText().trim());
+            } else {
+                jqService.pushjson(docPath, doc.getText(sel).trim());
+            }
+        }
+    });
+
     return {
         dispose: (): any => {
             jqsub.unsubscribe();
             jsonsub.unsubscribe();
             docEvt.dispose();
+            selectionEvt.dispose();
         }
     };
 }
