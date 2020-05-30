@@ -69,7 +69,7 @@ export function initJq(): vscode.Disposable {
 
     const selectionEvt = vscode.window.onDidChangeTextEditorSelection((selectChangeEvt) => {
         const doc = vscode.window.activeTextEditor?.document;
-        if (doc && doc.languageId !== 'jqx') {
+        if (doc && doc.languageId !== 'jqx' && doc.languageId !== 'Log') {
             const sel = vscode.window.activeTextEditor?.selection;
             const docPath = doc.uri.toString();
             if (!sel || sel.isEmpty) {
@@ -105,6 +105,9 @@ function execjq() {
         const { jq } = jqmodule;
         try {
             const result = jq(_json, _jq, opts);
+            if (result.stderr && result.stderr.includes('parse error: Invalid numeric literal')) {
+                _jqdash = jqdash();
+            }
             newOutput(result.stdout || result.stderr);
         } catch (err) {
             _jqdash = jqdash();
