@@ -1,13 +1,14 @@
 # jq-vscode
 This extension allows users run jq queries in the editor. The result is displayed synchronously in the output.
 
-### usage
-- Open a json or text file.
+### Jq Version
+This extension uses the latest 1.6 version of the [jq](https://stedolan.github.io/jq/) processor.
 
-- Open a .jqx file for jq query: (Ctrl+Shift+P) and search "jq: open an ...".
+### Usage
+- Filter the currently active json doc by jq in a split editor: (Ctrl+Shift+P) and search "jq: open an ...".
 
-![open](https://raw.githubusercontent.com/petli-full/jq-vscode/master/images/open.png)
+![filter json](https://raw.githubusercontent.com/petli-full/jq-vscode/master/images/filter_json.gif)
 
-- Check result.
+- Filter only the selected text.
 
-![open](https://raw.githubusercontent.com/petli-full/jq-vscode/master/images/result.png)
+![filter selected text](https://raw.githubusercontent.com/petli-full/jq-vscode/master/images/filter_selected.gif)

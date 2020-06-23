@@ -9,6 +9,7 @@ export const formatterCompletion = {
         //formatters
         for (let formatter of formatters) {
             const completion = new vscode.CompletionItem(formatter.label);
+            completion.insertText = formatter.label.substring(1); // remove '@'
             completion.kind = vscode.CompletionItemKind.Function;
             completion.documentation = new vscode.MarkdownString(formatter.documentation);
             completions.push(completion);
