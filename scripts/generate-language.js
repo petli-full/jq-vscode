@@ -1,6 +1,8 @@
 const jqdash = require('jqdash');
 const fs = require('fs');
 
+const jqTaggers = require('../src/language/formatters.json');
+
 const templateFile = './syntaxes/jqx.tmLanguage.tmpl';
 const jsonFile = './syntaxes/jqx.tmLanguage.json';
 jqdash.default().then((result) => {
@@ -13,9 +15,22 @@ jqdash.default().then((result) => {
             return;
         }
 
-        fs.unlinkSync(jsonFile);
+        try {
+            fs.unlinkSync(jsonFile);
+        } catch (err) { }
 
-        const generated = data.toString().replace('{{functions}}', funcs.join('|'));
+
+        // jq functions
+        let generated = data.toString().replace('{{functions}}', funcs.join('|'));
+
+        // jq taggers
+        const jqTaggerKws = jqTaggers.map(val => val.label);
+        generated = generated.replace('{{jq-taggers}}', jqTaggerKws.join('|'));
+
+        // any-json
+        const anyJsonKws = ['ajson', 'json5', 'yaml', 'cson', 'hjson', 'ini', 'toml', 'xml', 'csv', 'xlsx', 'xls'];
+        generated = generated.replace('{{any-json}}', anyJsonKws.join('|'));
+
         fs.writeFile(jsonFile, generated, function (err) {
             if (err) {
                 console.log(err);

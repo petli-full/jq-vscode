@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import jqdash from 'jqdash';
 import { newOutput } from './output';
+import { decodeJson } from './json';
 
 const jq$ = new Subject<string>();
 let _jq: string = '';
@@ -101,10 +102,14 @@ function execjq() {
     if (!_json) {
         opts.push('-n');
     }
-    _jqdash.then((jqmodule: any) => {
+
+    decodeJson(_json, _jq).then(async (request: { json: string, jq: string }) => {
+        const jqmodule: any = await _jqdash;
         const { jq } = jqmodule;
+        return Promise.resolve({ jqFunc: jq, ...request });
+    }).then(async (jqJob: { jqFunc: Function, json: string, jq: string }) => {
         try {
-            const result = jq(_json, _jq, opts);
+            const result = jqJob.jqFunc(jqJob.json, jqJob.jq, opts);
             if (result.stderr && result.stderr.includes('parse error: Invalid numeric literal')) {
                 _jqdash = jqdash();
             }
@@ -113,5 +118,7 @@ function execjq() {
             _jqdash = jqdash();
             newOutput('runtime error');
         }
+    }).catch((err) => {
+        newOutput(err);
     });
 }

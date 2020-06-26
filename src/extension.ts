@@ -3,7 +3,7 @@
 import * as vscode from 'vscode';
 
 import { openjq } from './commands';
-import { functionsCompletion, formatterCompletion } from './language';
+import { functionsCompletion, formatterCompletion, ajsonCompletion } from './language';
 import { RootCodeLensProvider } from './codeLens';
 import { initServices } from './services';
 
@@ -33,6 +33,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 		// completion providers
 		vscode.languages.registerCompletionItemProvider(selectors, formatterCompletion, '@'),
+		vscode.languages.registerCompletionItemProvider(selectors, ajsonCompletion, '.'),
 
 		// services
 		initServices()
