@@ -22,3 +22,7 @@ ajson.<input-file-format> |
 <jq queries>
 ```
 ![any-json](https://raw.githubusercontent.com/petli-full/jq-vscode/master/images/any_json.gif)
+
+#### Command line options
+Some of the useful jq command line options are supported, like `--slurp`, `--sort-keys` and so on.
+![command-line-options](https://raw.githubusercontent.com/petli-full/jq-vscode/master/images/options.gif)
