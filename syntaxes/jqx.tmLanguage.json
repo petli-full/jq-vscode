@@ -22,7 +22,7 @@
                 },
                 {
                     "name": "support.function.jqx",
-                    "match": "\\b(ajson|json5|yaml|cson|hjson|ini|toml|xml|csv|xlsx|xls)\\b"
+                    "match": "\\b(ajson|json5|yaml|hjson|ini|toml|xml|csv|xlsx|xls)\\b"
                 }
             ]
         },

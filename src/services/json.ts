@@ -1,11 +1,10 @@
-import { decode } from 'any-json';
+import { decode } from 'any-json-no-cson';
 
 
 export const anyJsonPrefix = 'ajson.';
 export const anyJsonFormats = [
     'json5',
     'yaml',
-    'cson',
     'hjson',
     'ini',
     'toml',
@@ -39,7 +38,11 @@ export async function decodeJson(jsonText: string, jqText: string): Promise<{ js
 
     try {
         const jsonDecoded = await decode(_jsonText, _anyJson);
-        return { json: JSON.stringify(jsonDecoded), jq: _jqText };
+        const jsonDocs: string[] = [];
+        jsonDecoded.forEach((jVal: string) => {
+            jsonDocs.push(JSON.stringify(jVal));
+        });
+        return { json: jsonDocs.join('\n'), jq: _jqText };
     }
     catch (err) {
         return Promise.reject(`input is not a valid ${_anyJson}`);

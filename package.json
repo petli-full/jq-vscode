@@ -3,7 +3,7 @@
 	"name": "jq-vscode",
 	"displayName": "jq-vscode",
 	"description": "an inline jq processer for vscode",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"engines": {
 		"vscode": "^1.45.0"
 	},
@@ -76,6 +76,8 @@
 		"test-compile": "tsc -p ./"
 	},
 	"devDependencies": {
+		"@babel/core": "^7.10.3",
+		"@babel/preset-env": "^7.10.3",
 		"@types/glob": "^7.1.1",
 		"@types/mocha": "^7.0.2",
 		"@types/node": "^13.11.0",
@@ -92,7 +94,7 @@
 		"webpack-cli": "^3.3.11"
 	},
 	"dependencies": {
-		"any-json": "^3.1.0",
+		"any-json-no-cson": "^3.1.5",
 		"jqdash": "^1.0.1",
 		"rxjs": "^6.5.5"
 	}
