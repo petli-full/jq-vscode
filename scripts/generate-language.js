@@ -28,7 +28,7 @@ jqdash.default().then((result) => {
         generated = generated.replace('{{jq-taggers}}', jqTaggerKws.join('|'));
 
         // any-json
-        const anyJsonKws = ['ajson', 'json5', 'yaml', 'hjson', 'ini', 'toml', 'xml', 'csv', 'xlsx', 'xls'];
+        const anyJsonKws = ['ajson', 'json5', 'yaml', 'hjson', 'ini', 'toml', 'xml', 'csv', 'xlsx', 'xls', 'hocon'];
         generated = generated.replace('{{any-json}}', anyJsonKws.join('|'));
 
         fs.writeFile(jsonFile, generated, function (err) {

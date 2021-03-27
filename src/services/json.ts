@@ -11,7 +11,8 @@ export const anyJsonFormats = [
     'xml',
     'csv',
     'xlsx',
-    'xls'
+    'xls',
+    'hocon'
 ];
 
 
@@ -39,7 +40,7 @@ export async function decodeJson(jsonText: string, jqText: string): Promise<{ js
     try {
         const jsonDecoded = await decode(_jsonText, _anyJson);
         const jsonDocs: string[] = [];
-        jsonDecoded.forEach((jVal: string) => {
+        jsonDecoded.forEach((jVal: any) => {
             jsonDocs.push(JSON.stringify(jVal));
         });
         return { json: jsonDocs.join('\n'), jq: _jqText };
