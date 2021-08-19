@@ -32,7 +32,7 @@ export function initJq(): vscode.Disposable {
         debounceTime(750),
         distinctUntilChanged(),
     ).subscribe((text) => {
-        _jq = text.split("\n").join(' ').trim();
+        _jq = text.trim();
         if (_jq) { _hasJq = true; }
         execjq();
     });
